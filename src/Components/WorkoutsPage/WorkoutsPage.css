@@ -1,0 +1,64 @@
+.workouts-page-container {
+	position: relative;
+
+	width: 100%;
+	height: 100%;
+}
+
+.workouts-page-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	border: 1px solid black;
+}
+
+.workouts-list-container {
+	position: relative;
+
+	height: 100%;
+	width: 29%;
+
+	border: 1px solid red;
+	float: left;
+}
+
+.workouts-list-wrapper {
+	position: relative;
+	height: 99%;
+	width: 90%;
+}
+
+.workouts-list-header {
+	position: relative;
+	margin-bottom: 40px;
+}
+
+.workouts-header-text {
+	position: relative;
+	display: inline-block;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.create-workout-button {
+	position: absolute;
+	right: 0px;
+}
+
+.chart-container {
+	position: relative;
+
+	width: 70%;
+	height: 500px;
+	float: right;
+}
+.chart-wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.chart-container-header {
+	margin-left: 40px;
+	margin-top: 20px;
+}

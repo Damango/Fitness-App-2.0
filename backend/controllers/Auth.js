@@ -7,10 +7,6 @@ const { Mongoose } = require('mongoose')
 
 const register = async (req,res,next) => {
 
-
-
-
-
     User.findOne({name:req.body.name}).then( user => {
 
         console.log(user)
@@ -81,7 +77,7 @@ const login = (req,res,next) =>{
             }
             else{
          
-
+                
                 res.json({error:"Not User Found"})
                 console.log(req.body)
             }

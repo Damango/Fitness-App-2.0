@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import "./LoginPage.css"
+import WorkoutsPage from "../WorkoutsPage/WorkoutsPage"
 
 
 const LoginPage = (props) => {
@@ -21,7 +22,7 @@ const LoginPage = (props) => {
             console.log(res)
             if(res.data.error == null){
               props.changeView('workouts-page')
-              props.setUserData(res.data)
+              //props.setUserData(res.data)
             }
             else{
               
@@ -41,7 +42,7 @@ const LoginPage = (props) => {
             console.log(res)
             if(res.data.error == null){
               props.changeView('workouts-page')
-              props.setUserData(res.data)
+              //props.setUserData(res.data)
             }
             else{
               

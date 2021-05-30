@@ -10,19 +10,27 @@ function App() {
 
   let connection = 'http://localhost:3000/'
 
-  const [appState, setAppState] = useState(<LoginPage connection={connection}/>)
+  const [appState, setAppState] = useState('login')
+  const [userData, setUserData] = useState({})
 
 
-  useEffect(() => {
 
-    setAppState(<LoginPage changeView={setAppState} connection={connection}/>)
-  } ,[])
+  function renderView(){
+
+    if(appState === 'login'){
+      return(<LoginPage changeView={setAppState} connection={connection}/>)
+    }
+    else if(appState === 'workouts-page'){
+      return(<WorkoutsPage data={userData}/>)
+    }
+
+  }
 
 
   return (
     <div className="App">
       <div className="app-wrapper">
-        {appState}
+        {renderView()}
       </div>
     
      

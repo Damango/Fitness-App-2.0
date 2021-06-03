@@ -21,8 +21,9 @@ const LoginPage = (props) => {
         .then((res) => {
             console.log(res)
             if(res.data.error == null){
-              props.changeView('workouts-page')
               props.setUserData(res.data)
+              props.changeView('workouts-page')
+              
             }
             else{
               
@@ -41,8 +42,9 @@ const LoginPage = (props) => {
         .then((res) => {
             console.log(res)
             if(res.data.error == null){
-              props.changeView('workouts-page')
               props.setUserData(res.data)
+              props.changeView('workouts-page')
+              
             }
             else{
               

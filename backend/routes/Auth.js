@@ -4,7 +4,7 @@ const router = express.Router()
 
 const AuthController = require('../controllers/Auth')
 const WorkoutController = require('../controllers/AddWorkout')
-const getWorkoutController = require('../controllers/GetWorkouts')
+const getWorkoutsController = require('../controllers/GetWorkouts')
 const DeleteWorkoutController = require('../controllers/DeleteWorkout')
 const AddExerciseController = require('../controllers/AddExercise');
 const AddSetController = require('../controllers/AddSet');
@@ -17,7 +17,7 @@ const UpdateTemplateController = require('../controllers/UpdateTemplate')
 router.post('/deleteWorkout', DeleteWorkoutController.deleteWorkout)
 
 
-router.post('/getWorkout', getWorkoutController.getWorkout)
+router.post('/getWorkouts', getWorkoutsController.getWorkouts)
 
 router.post('/login', AuthController.login)
 router.post('/register', AuthController.register)

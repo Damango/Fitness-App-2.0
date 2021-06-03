@@ -5,57 +5,61 @@ const Workout = require('../Models/UserModel')
 
 
 const addWorkout = async (req,res,data) =>{
+    
+    let workouts;
 
 
+    User.findOne({name:req.body.name}).then( user => {
 
+        
 
-    if(User.findOne({name:req.body.name})){
-
-        let workouts;
-
-        if(req.body.workouts == null){
+        if(user.workouts === null){
             workouts = []
         }
         else{
-            workouts = req.body.workouts;
+            workouts = user.workouts;
         }
 
+        
+
      
-       // console.log(req.body.workouts)
+       //console.log(workouts)
    
 
         let workout = {
-            title: req.body.title,
-            exercises: req.body.exercises
+            title: req.body.workoutData.title,
+            exercises: req.body.workoutData.exercises
          }
+
+         //console.log(workout)
 
 
        workouts.push(workout)
 
+      // console.log(workouts)
+
          
 
-       
-        await User.updateOne({
-            name: req.body.name
-        },{
-            workouts:workouts
-        })
-        
-        res.json(workouts)
-         
-        console.log("Workout Added")
-
-
+        User.updateOne({
+        name: req.body.name
+    },{
+        workouts:workouts
+    }).then((err => {console.log(err)}))
+    
+    res.json(workouts)
      
-         /*user.save().then(user => {
-             res.json(user)
-         }).catch(error => {
-             res.json({
-                 message: "Error creating user"
-             })
-         })*/
-       
-    }
+    console.log("Workout Added")
+
+
+
+
+    })
+
+
+
+
+    
+
 
 
 }

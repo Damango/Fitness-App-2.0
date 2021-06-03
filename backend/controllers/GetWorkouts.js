@@ -4,14 +4,14 @@ const User = require('../Models/UserModel')
 const Workout = require('../Models/UserModel')
 
 
-const getWorkout = async (req,res,data) =>{
+const getWorkouts = async (req,res,data) =>{
 
 
    
 
-    User.findOne({name:req.body.name}).then( (user) => {
+    User.findOne({name:req.body.name}).then((user) => {
 
-
+        console.log(req.body)
         res.json(user.workouts)
  
     })
@@ -19,5 +19,5 @@ const getWorkout = async (req,res,data) =>{
 
 
 module.exports = {
-   getWorkout
+   getWorkouts
 }

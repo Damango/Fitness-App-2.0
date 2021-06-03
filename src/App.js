@@ -18,10 +18,10 @@ function App() {
   function renderView(){
 
     if(appState === 'login'){
-      return(<LoginPage changeView={setAppState} connection={connection}/>)
+      return(<LoginPage changeView={setAppState} setUserData={setUserData} connection={connection}/>)
     }
     else if(appState === 'workouts-page'){
-      return(<WorkoutsPage data={userData}/>)
+      return(<WorkoutsPage data={userData} connection={connection}/>)
     }
 
   }
@@ -32,8 +32,6 @@ function App() {
       <div className="app-wrapper">
         {renderView()}
       </div>
-    
-     
     </div>
   );
 }

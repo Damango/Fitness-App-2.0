@@ -2,29 +2,51 @@ import React, {useState, useEffect} from 'react';
 import "./WorkoutsPage.css"
 import WorkoutCard from "../WorkoutCard/WorkoutCard"
 import LineChart from "../LineChart/LineChart"
+import WorkoutView from "../WorkoutView/WorkoutView"
+import axios from "axios"
 import { Line } from '@nivo/line';
 
 
 const WorkoutsPage = (props) => {
 
 
-
-    const [workoutsList, setWorkoutsList] = useState([
-        {title: "First Workout",
-            date: "May 15th",
-        },
-        {title: "Second Workout",
-        date: "May 15th",
-    },
-    {title: "Third Workout",
-    date: "May 15th",
-}
-    
-    
-    ])
+    const [workoutView, setWorkoutView] = useState(0);
 
 
 
+
+    const [workoutsList, setWorkoutsList] = useState([])
+
+
+    console.log(props.data)
+
+    useEffect(() => {
+
+        if(props.data.name != null){
+            axios.post(props.connection + 'user/getWorkouts', {name: props.data.name}).then((res) => {
+                console.log(res)
+                if(props.data.workouts != null){
+                    setWorkoutsList(props.data.workouts)
+                }
+                
+            })
+        }
+        
+    }, [])
+
+
+
+
+    function renderWorkoutView(){
+
+        if(workoutView === 1){
+            return(<WorkoutView closeView={setWorkoutView} connection={props.connection} userData={props.data}/>)
+        }
+        else{
+            return ('')
+        }
+
+    }
     
 
 
@@ -33,6 +55,7 @@ const WorkoutsPage = (props) => {
 
 
     return ( <div className="workouts-page-container">
+        {renderWorkoutView()}
 
 
        <div className="workouts-page-wrapper">
@@ -42,7 +65,7 @@ const WorkoutsPage = (props) => {
                <div className="workouts-list-wrapper center-all">
                    <div className="workouts-list-header">
                        <div className="workouts-header-text">Workouts</div>
-                       <button className="create-workout-button center-y">Create Workout +</button>
+                       <button className="create-workout-button center-y" onClick={() => {setWorkoutView(1)}}>Create Workout +</button>
                    </div>
                 {workoutsList.map((workout) => <WorkoutCard data={workout}/> )}
                </div>

@@ -22,7 +22,7 @@ const LoginPage = (props) => {
             console.log(res)
             if(res.data.error == null){
               props.changeView('workouts-page')
-              //props.setUserData(res.data)
+              props.setUserData(res.data)
             }
             else{
               
@@ -42,7 +42,7 @@ const LoginPage = (props) => {
             console.log(res)
             if(res.data.error == null){
               props.changeView('workouts-page')
-              //props.setUserData(res.data)
+              props.setUserData(res.data)
             }
             else{
               

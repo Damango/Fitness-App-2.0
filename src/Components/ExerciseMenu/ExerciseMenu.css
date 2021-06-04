@@ -1,8 +1,83 @@
 .exercise-menu-container {
 	position: absolute;
 	width: 600px;
-	height: 700px;
+	max-height: 700px;
 	background-color: white;
-	border: 1px solid black;
+	box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.644);
 	z-index: 5;
+}
+
+.exercise-list {
+	overflow-y: scroll;
+	height: 600px;
+}
+
+.menu-add-exercise-button-selected {
+	position: absolute;
+
+	z-index: 12;
+	bottom: -80px;
+	background-color: #f1c40f;
+	color: white;
+	border-style: none;
+	padding: 10px 20px;
+	font-size: 30px;
+	font-family: "Open Sans";
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+.menu-add-exercise-button-empty {
+	position: absolute;
+
+	z-index: 12;
+	bottom: -80px;
+	background-color: #292102;
+	color: white;
+	border-style: none;
+	padding: 10px 20px;
+	font-size: 30px;
+	font-family: "Open Sans";
+	font-weight: bold;
+	transition: 0.3s;
+}
+.menu-add-exercise-button-empty:hover {
+	cursor: not-allowed;
+}
+
+.menu-add-exercise-button-selected:hover {
+	background-color: #967907;
+	cursor: pointer;
+}
+
+.Chest {
+	background-color: #e67e22;
+}
+
+.Chest:hover {
+	background-color: #aa5c17;
+}
+
+.Back {
+	background-color: #1d93e2;
+}
+
+.Shoulders {
+	background-color: #e74c3c;
+}
+
+.Legs {
+	background-color: #8e44ad;
+}
+
+.Tricep {
+	background-color: #27ae60;
+}
+
+.Bicep {
+	background-color: #f1c40f;
+}
+
+.Abs {
+	background-color: #2b557e;
 }

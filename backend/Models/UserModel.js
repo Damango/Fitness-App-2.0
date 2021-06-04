@@ -62,6 +62,11 @@ const userSchema = new mongoose.Schema({
         type: Array,
         required: true,
         default: []
+    },
+    exerciseStats:{
+        type: Array,
+        required: true,
+        default: []
     }
 
     

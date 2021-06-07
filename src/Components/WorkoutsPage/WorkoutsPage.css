@@ -75,3 +75,8 @@
 	margin-left: 40px;
 	margin-top: 20px;
 }
+
+.workout-list-scroll {
+	height: 90%;
+	overflow-y: scroll;
+}

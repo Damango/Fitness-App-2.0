@@ -10,10 +10,16 @@ const WorkoutView = (props) => {
     
     const [workoutData, setWorkoutData] = useState(props.data)
     const [exerciseMenu, setExerciseMenu] = useState(0)
+    const [exercisesList, setExercisesList] = useState([])
 
     useEffect(() => {
         let theView = document.querySelector('.workout-view-container');
         theView.style.opacity = 1;
+
+
+        if(props.data != null){
+            setExercisesList(props.data.exercises)
+        }
     }, [])
 
 
@@ -22,7 +28,7 @@ const WorkoutView = (props) => {
 
     function renderExerciseMenu(){
         if(exerciseMenu === 1){
-            return(<ExerciseMenu />)
+            return(<ExerciseMenu updateWorkoutList={props.updateWorkoutList} updateExerciseList={setExercisesList} exercises={exercisesList} connection={props.connection} userData={props.userData} data={workoutData}/>)
         }
     }
 
@@ -40,19 +46,22 @@ const WorkoutView = (props) => {
         }
         axios.post(props.connection + 'user/addWorkout', postObject).then((res) => {
             console.log(res)
+            props.updateWorkouts(res.data)
         })
         console.log(props.connection + 'user/addWorkout')
+        props.closeView(0)
+       
     }
 
 
 
-    if(props.data!= null){
+    if(props.data != null){
 
 
         return(<div className="workout-view-container">
         <div className="workout-view-wrapper">
             {renderExerciseMenu()}
-           <button className="close-workout-view-button" onClick={() => {props.closeView(0)}}>Close</button>
+           <button className="close-workout-view-button" onClick={() => {props.closeView(0); props.updateWorkoutList()}}>Close</button>
             <div className="workout-chart-container">
             </div>
             <div className="workout-exercises-container">
@@ -60,7 +69,7 @@ const WorkoutView = (props) => {
                 <div className="workout-view-title">{workoutData.title}</div>
                     <button className="add-exercise-button" onClick={() => {setExerciseMenu(1)}}>Add Exercise</button>
                     <div className="workout-view-exercise-list-wrapper">
-                        {workoutData.exercises.map((exercise) => <Exercise />)}
+                        {exercisesList.map((exercise) => <Exercise data={exercise}/>)}
 
                     </div>
 

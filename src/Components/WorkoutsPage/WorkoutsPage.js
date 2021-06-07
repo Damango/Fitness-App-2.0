@@ -15,7 +15,7 @@ const WorkoutsPage = (props) => {
     const [workoutsList, setWorkoutsList] = useState([])
 
 
-    console.log(props.data)
+    console.log(workoutsList)
 
     useEffect(() => {
 
@@ -40,14 +40,29 @@ const WorkoutsPage = (props) => {
        
         
     }, [])
+    
 
+
+    function updateWorkoutList(){
+    
+            axios.post(props.connection + 'user/getWorkouts', {name: props.data.name}).then((res) => {
+                console.log(res)
+
+                    //setWorkoutsList(props.data.workouts)
+
+
+                
+            })
+        
+      
+    }
 
 
 
     function renderWorkoutView(){
 
         if(workoutView === 1){
-            return(<WorkoutView closeView={setWorkoutView} connection={props.connection} userData={props.data} data={workoutViewData}/>)
+            return(<WorkoutView updateWorkoutList={updateWorkoutList} updateWorkouts={setWorkoutsList} closeView={setWorkoutView} connection={props.connection} userData={props.data} data={workoutViewData}/>)
         }
         else{
             return ('')
@@ -74,7 +89,10 @@ const WorkoutsPage = (props) => {
                        <div className="workouts-header-text">Workouts</div>
                        <button className="create-workout-button center-y" onClick={() => {setWorkoutViewData(); setWorkoutView(1)}}>Create Workout +</button>
                    </div>
-                {workoutsList.map((workout) => <WorkoutCard data={workout} openWorkoutView={setWorkoutView} setWorkoutViewData={setWorkoutViewData}/> )}
+                   <div className="workout-list-scroll"> 
+                   {workoutsList.map((workout) => <WorkoutCard data={workout} openWorkoutView={setWorkoutView} setWorkoutViewData={setWorkoutViewData}/> )}
+                   </div>
+               
                </div>
            </div>
           

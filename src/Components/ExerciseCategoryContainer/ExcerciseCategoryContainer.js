@@ -32,7 +32,7 @@ const ExerciseCategoryContainer = (props) => {
         
     }
 
-    console.log(props.data)
+
 
 
     return ( <div className="exercise-category-container" >

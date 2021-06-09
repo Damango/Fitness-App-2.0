@@ -12,6 +12,8 @@ const WorkoutView = (props) => {
     const [exerciseMenu, setExerciseMenu] = useState(0)
     const [exercisesList, setExercisesList] = useState([])
 
+    const [updater,setUpdater] = useState(0)
+
     useEffect(() => {
         let theView = document.querySelector('.workout-view-container');
         theView.style.opacity = 1;
@@ -28,8 +30,18 @@ const WorkoutView = (props) => {
 
     function renderExerciseMenu(){
         if(exerciseMenu === 1){
-            return(<ExerciseMenu updateWorkoutList={props.updateWorkoutList} updateExerciseList={setExercisesList} exercises={exercisesList} connection={props.connection} userData={props.userData} data={workoutData}/>)
+            return(<ExerciseMenu updater={updater} setUpdater={setUpdater} updateWorkoutList={props.updateWorkoutList} updateExerciseList={updateExerciseList} exercises={exercisesList} connection={props.connection} userData={props.userData} data={workoutData}/>)
         }
+    }
+
+    function updateExerciseList(data){
+
+        console.log(exercisesList)
+
+        setExercisesList(data)
+
+        console.log(exercisesList)
+
     }
 
 
@@ -53,6 +65,21 @@ const WorkoutView = (props) => {
        
     }
 
+    function deleteWorkout(){
+
+        let postObject;
+        postObject = {
+            name: props.userData.name,
+            workoutID:props.data._id}
+
+        axios.post(props.connection + 'user/deleteWorkout', postObject).then((res) => {
+            console.log(res)
+            props.updateWorkouts(res.data)
+        })
+        props.closeView(0)
+
+    }
+
 
 
     if(props.data != null){
@@ -61,13 +88,14 @@ const WorkoutView = (props) => {
         return(<div className="workout-view-container">
         <div className="workout-view-wrapper">
             {renderExerciseMenu()}
+            <span className="settings-button" onClick={() => {deleteWorkout()}}><i class="fas fa-cog"></i></span>
            <button className="close-workout-view-button" onClick={() => {props.closeView(0); props.updateWorkoutList()}}>Close</button>
             <div className="workout-chart-container">
             </div>
             <div className="workout-exercises-container">
                 <div className="workout-exercises-wrapper">
                 <div className="workout-view-title">{workoutData.title}</div>
-                    <button className="add-exercise-button" onClick={() => {setExerciseMenu(1)}}>Add Exercise</button>
+                    <button className="add-exercise-button" onClick={() => {setExerciseMenu(1)}}>Add Exercise +</button>
                     <div className="workout-view-exercise-list-wrapper">
                         {exercisesList.map((exercise) => <Exercise data={exercise}/>)}
 

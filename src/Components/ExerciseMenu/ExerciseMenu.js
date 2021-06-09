@@ -28,15 +28,21 @@ const ExerciseMenu = (props) => {
             newExercise: exerciseObject,
             workoutID: props.data._id
         }).then((res) => {
+
+
+            let oldList = props.exercises;
+
+            let newList = oldList;
+            newList.push(exerciseObject)
+            
             setSelectedExercise(exerciseObject)
-            props.updateExerciseList(res.data[0].exercises)
+            console.log(newList)
+            
+            props.updateExerciseList(newList)
+            props.setUpdater(props.updater + 1)
+            
 
-            let updatedWorkout = props.data
-            updatedWorkout.exercises.push(exerciseObject)
-
-            // props.updateWorkoutList()
-            //console.log(updatedWorkout)
-            console.log(res)
+            //console.log(res)
         })
     }
     return ( <div className="exercise-menu-container center-all">

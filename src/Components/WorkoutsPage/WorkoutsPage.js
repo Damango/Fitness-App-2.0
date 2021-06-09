@@ -15,7 +15,7 @@ const WorkoutsPage = (props) => {
     const [workoutsList, setWorkoutsList] = useState([])
 
 
-    console.log(workoutsList)
+    //console.log(workoutsList)
 
     useEffect(() => {
 

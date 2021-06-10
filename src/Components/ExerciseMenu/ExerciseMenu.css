@@ -50,6 +50,15 @@
 	cursor: pointer;
 }
 
+.close-exercise-menu-button {
+	position: absolute;
+	top: -50px;
+	right: 0px;
+	background-color: red;
+	color: white;
+	padding: 10px;
+}
+
 .Chest {
 	background-color: #e67e22;
 }

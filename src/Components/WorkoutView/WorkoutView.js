@@ -30,7 +30,7 @@ const WorkoutView = (props) => {
 
     function renderExerciseMenu(){
         if(exerciseMenu === 1){
-            return(<ExerciseMenu updater={updater} setUpdater={setUpdater} updateWorkoutList={props.updateWorkoutList} updateExerciseList={updateExerciseList} exercises={exercisesList} connection={props.connection} userData={props.userData} data={workoutData}/>)
+            return(<ExerciseMenu closeMenu={setExerciseMenu} updater={updater} setUpdater={setUpdater} updateWorkoutList={props.updateWorkoutList} updateExerciseList={updateExerciseList} exercises={exercisesList} connection={props.connection} userData={props.userData} data={workoutData}/>)
         }
     }
 
@@ -93,6 +93,12 @@ const WorkoutView = (props) => {
             <div className="workout-chart-container">
             </div>
             <div className="workout-exercises-container">
+                <div className="workout-view-stats-container">
+                    <div className="stat-block-container"><span className="stat-block-text center-all">Volume: 5000</span></div>
+                    <div className="stat-block-container"><span className="stat-block-text center-all">Volume: 5000</span></div>
+                    <div className="stat-block-container"><span className="stat-block-text center-all">Volume: 5000</span></div>
+                    <div className="stat-block-container"><span className="stat-block-text center-all">Volume: 5000</span></div>
+                </div>
                 <div className="workout-exercises-wrapper">
                 <div className="workout-view-title">{workoutData.title}</div>
                     <button className="add-exercise-button" onClick={() => {setExerciseMenu(1)}}>Add Exercise +</button>

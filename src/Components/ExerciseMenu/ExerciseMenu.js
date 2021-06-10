@@ -46,9 +46,11 @@ const ExerciseMenu = (props) => {
         })
     }
     return ( <div className="exercise-menu-container center-all">
+        
         <div className="exercise-list">
         {exerciseData.exerciseList.map((exercise) => <ExerciseCategoryContainer data={exercise} selectExercise={setSelectedExercise} selectedExercise={selectedExercise}/>)}
         </div>
+        <button className="close-exercise-menu-button" onClick={() => {props.closeMenu(0)}}>X</button>
         <button className={exerciseButtonStyle() + ' center-x'} onClick={() => {saveExercise()}}>Add Exercise</button>
     </div> );
 }

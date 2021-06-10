@@ -5,6 +5,7 @@
 	background-color: white;
 	z-index: 2;
 	opacity: 0;
+	overflow-x: hidden;
 	transition: 0.2s;
 }
 
@@ -33,13 +34,39 @@
 .workout-chart-container {
 	position: relative;
 	background-color: #8b2014;
-	height: 400px;
+	height: 350px;
 }
 
 .workout-exercises-container {
 	position: relative;
 	background-color: white;
-	height: 400px;
+}
+
+.workout-exercises-wrapper {
+	position: relative;
+}
+
+.workout-view-stats-container {
+	background-color: blue;
+	border-bottom: 1px solid black;
+	height: 100px;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.stat-block-container {
+	position: relative;
+	padding: 20px;
+	width: 100%;
+	box-sizing: border-box;
+	border-bottom: 1px solid black;
+	border-left: 1px solid black;
+	text-align: center;
+	background-color: white;
+}
+
+.stat-block-text {
+	position: absolute;
 }
 
 .workout-title-input {
@@ -73,4 +100,27 @@
 .add-exercise-button:hover {
 	cursor: pointer;
 	background-color: #27ae60;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+	border-radius: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+	border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
 }

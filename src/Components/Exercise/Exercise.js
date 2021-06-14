@@ -33,6 +33,21 @@ const Exercise = (props) => {
     }
 
 
+    function deleteExercise(){
+
+
+        let postObject = {
+            workoutID: props.workoutData._id,
+           name:props.userData.name,
+           exerciseID:props.data.ID
+        }
+
+        axios.post(props.connection + '/user/deleteExercise', postObject).then((res) => {
+            console.log(res)
+        })
+    }
+
+
     return ( <div className="exercise-container">
        <div className="exercise-name">{props.data.name}</div>
        <div className="categories-container">categories</div>
@@ -40,6 +55,7 @@ const Exercise = (props) => {
            {setList.map((set) => <div className="set-block center-y">{set.reps} x {set.weight}</div>)}
            <button className="add-set-button center-y" onClick={addSet}>+</button>
        </div>
+       <button className="delete-exercise-button" onClick={deleteExercise}>X</button>
     </div> );
 }
  

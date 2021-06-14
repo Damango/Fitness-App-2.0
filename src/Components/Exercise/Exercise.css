@@ -36,3 +36,11 @@
 	display: inline-block;
 	margin-right: 25px;
 }
+
+.delete-exercise-button {
+	position: absolute;
+	background-color: rgb(180, 0, 0);
+	color: white;
+	top: 20px;
+	right: 30px;
+}

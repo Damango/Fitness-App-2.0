@@ -12,7 +12,8 @@ const WorkoutsPage = (props) => {
 
     const [workoutView, setWorkoutView] = useState(0);
     const [workoutViewData, setWorkoutViewData] = useState()
-    const [workoutsList, setWorkoutsList] = useState([])
+    const [workoutsList, setWorkoutsList] = useState([]);
+    const [chartData, setChartData] = useState()
 
 
     //console.log(workoutsList)
@@ -27,6 +28,7 @@ const WorkoutsPage = (props) => {
                     console.log(res)
                     if(props.data.workouts != null){
                         setWorkoutsList(props.data.workouts)
+                  
                     }
                     
                 })
@@ -48,7 +50,7 @@ const WorkoutsPage = (props) => {
             axios.post(props.connection + 'user/getWorkouts', {name: props.data.name}).then((res) => {
                 console.log(res)
 
-                    //setWorkoutsList(props.data.workouts)
+                    setWorkoutsList(res.data)
 
 
                 
@@ -68,6 +70,38 @@ const WorkoutsPage = (props) => {
             return ('')
         }
 
+    }
+
+
+    function calculateChartData(){
+
+
+        let theChartData = []
+        let i, j, k;
+        for(i = 0; i < workoutsList.length; i++){
+          let dailyVolume = 0;
+          for(j = 0; j < workoutsList[i].exercises.length; j++){
+            for(k = 0; k < workoutsList[i].exercises[j].sets.length; k++){
+              console.log(workoutsList[i].exercises[j].sets[k].reps)
+              console.log(workoutsList[i].exercises[j].sets[k].weight)
+              dailyVolume += (workoutsList[i].exercises[j].sets[k].reps * workoutsList[i].exercises[j].sets[k].weight);
+            }
+      
+          }
+    
+          let dataPoint = { 
+    
+            x: workoutsList[i].dateCreated,
+            y: dailyVolume
+    
+          }
+         theChartData.push(dataPoint)
+
+        }
+
+
+        console.log(theChartData)
+        return(theChartData)
     }
     
 
@@ -103,13 +137,15 @@ const WorkoutsPage = (props) => {
                 <div className="data-changer-button">Volume</div>
             </div>
             <div className="chart-wrapper">
-                <LineChart />
+                <LineChart chartData={calculateChartData}/>
+
+               
               
             </div>
         </div>
 
         <div className="templates-container">
-
+        <button onClick={() => {calculateChartData()}}>PRESS ME</button>
             <div className="templates-wrapper">
 
             </div>

@@ -1,17 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Exercise.css"
 import axios from 'axios'
 
 const Exercise = (props) => {
 
+    const [setList, setSetList] = useState(props.data.sets)
+
 
     function addSet(){
 
-        let postObject;
+
+        console.log(props.data);
+
+        let postObject = {
+           workoutID: props.workoutData._id,
+           name:props.userData.name,
+           newSet: {reps: 20, weight: 225},
+           exerciseID:props.data.ID
+
+        }
 
 
         axios.post(props.connection + '/user/addSet', postObject).then((res) => {
             console.log(res)
+
+            setSetList(res.data.sets)
+
+            
         })
 
         
@@ -22,8 +37,8 @@ const Exercise = (props) => {
        <div className="exercise-name">{props.data.name}</div>
        <div className="categories-container">categories</div>
        <div className="sets-list-container">
-           {props.data.sets.map((set) => <div className="set-block"></div>)}
-           <button className="add-set-button center-y">+</button>
+           {setList.map((set) => <div className="set-block center-y">{set.reps} x {set.weight}</div>)}
+           <button className="add-set-button center-y" onClick={addSet}>+</button>
        </div>
     </div> );
 }

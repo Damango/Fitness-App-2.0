@@ -17,14 +17,19 @@ User.findOne({name:req.body.name}).then( (user) => {
     workouts = user.workouts
 
     let i, j;
+    let theExercise;
+   
     for(i = 0; i < user.workouts.length; i++){
-     
-        if(workouts[i]._id == req.body.workoutID){
 
+        if(workouts[i]._id == req.body.workoutID){
+            
             for(j = 0; j < workouts[i].exercises.length; j++){
                 if(workouts[i].exercises[j].ID === req.body.exerciseID){
-                   
-                    workouts[i].exercises[j].sets.push(req.body.newSet)
+
+                    theExercise = workouts[i].exercises[j]
+       
+                    workouts[i].exercises[j].sets.push(req.body.newSet);
+                    
                 }
             }
     
@@ -32,7 +37,7 @@ User.findOne({name:req.body.name}).then( (user) => {
     }
 
     User.updateOne({name: req.body.name},{workouts:workouts}).then( err => {console.log(err)})
-    res.json(user.workouts)
+    res.json(theExercise)
   
 })
 

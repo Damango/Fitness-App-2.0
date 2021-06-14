@@ -103,7 +103,7 @@ const WorkoutView = (props) => {
                 <div className="workout-view-title">{workoutData.title}</div>
                     <button className="add-exercise-button" onClick={() => {setExerciseMenu(1)}}>Add Exercise +</button>
                     <div className="workout-view-exercise-list-wrapper">
-                        {exercisesList.map((exercise) => <Exercise data={exercise}/>)}
+                        {exercisesList.map((exercise) => <Exercise connection={props.connection} data={exercise} workoutData={props.data} userData={props.userData}/>)}
 
                     </div>
 

@@ -89,7 +89,7 @@ const Exercise = (props) => {
     }
 
 
-    return ( <div className="exercise-container">
+    return ( <div className="exercise-container center-x">
        <div className="exercise-name">{props.data.name}</div>
        <div className="categories-container">categories</div>
        <div className="sets-list-container">

@@ -1,8 +1,9 @@
 .exercise-container {
 	position: relative;
-	width: 100%;
+	width: 99%;
 
-	background-color: pink;
+	background-color: white;
+	box-shadow: 0px 0px 3px 1px black;
 	box-sizing: border-box;
 	padding: 20px;
 	margin-top: 15px;
@@ -11,16 +12,18 @@
 .exercise-name {
 	float: left;
 	margin-right: 30px;
+	font-size: 25px;
+	font-weight: bold;
+	color: #2f3640;
 }
 
 .sets-list-container {
 	display: block;
-	background-color: white;
+
 	height: 50px;
 	width: 100%;
 	margin-top: 30px;
 	box-sizing: border-box;
-	padding: 5px 15px;
 }
 
 .add-set-button {

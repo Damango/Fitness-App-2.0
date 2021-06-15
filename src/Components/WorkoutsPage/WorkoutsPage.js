@@ -24,7 +24,7 @@ const WorkoutsPage = (props) => {
                 axios.post(props.connection + 'user/getWorkouts', {name: props.data.name}).then((res) => {
                     console.log(res)
                     if(props.data.workouts != null){
-                        setWorkoutsList(props.data.workouts)
+                        setWorkoutsList(props.data.workouts.reverse())
                     }
                 })
             }
@@ -38,7 +38,7 @@ const WorkoutsPage = (props) => {
     function updateWorkoutList(){
             axios.post(props.connection + 'user/getWorkouts', {name: props.data.name}).then((res) => {
                 console.log(res)
-                    setWorkoutsList(res.data)
+                    setWorkoutsList(res.data.reverse())
             })
     }
 

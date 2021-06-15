@@ -30,13 +30,13 @@ User.findOne({name:req.body.name}).then( (user) => {
                 
                 exerciseStats[i] = req.body.exerciseInfo
                 console.log("IT EXSISTS")
+                nameExists = true;
                 break;
             }
+        }
 
-            else{
-                exerciseStats.push(req.body.exerciseInfo);
-                break;
-            }
+        if(nameExists === false){
+            exerciseStats.push(req.body.exerciseInfo);
         }
     }
 

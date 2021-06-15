@@ -10,7 +10,7 @@ const LineChart = (props) => {
         {
           "id": "Volume",
           "color": "hsl(195, 70%, 50%)",
-          "data": props.chartData()
+          "data": props.chartData().reverse()
         }
       ]
 

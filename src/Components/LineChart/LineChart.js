@@ -8,7 +8,7 @@ const LineChart = (props) => {
 
     let data = [
         {
-          "id": "japan",
+          "id": "Volume",
           "color": "hsl(195, 70%, 50%)",
           "data": props.chartData()
         }

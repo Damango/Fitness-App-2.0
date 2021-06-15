@@ -19,44 +19,27 @@ const WorkoutsPage = (props) => {
     //console.log(workoutsList)
 
     useEffect(() => {
-
         setTimeout(() => {
-
-
             if(props.data.name != null){
                 axios.post(props.connection + 'user/getWorkouts', {name: props.data.name}).then((res) => {
                     console.log(res)
                     if(props.data.workouts != null){
                         setWorkoutsList(props.data.workouts)
-                  
                     }
-                    
                 })
             }
             else{
                 console.log('Something is wrong')
             }
-            
         }, 100);
-
-       
-        
     }, [])
     
 
-
     function updateWorkoutList(){
-    
             axios.post(props.connection + 'user/getWorkouts', {name: props.data.name}).then((res) => {
                 console.log(res)
-
                     setWorkoutsList(res.data)
-
-
-                
             })
-        
-      
     }
 
 
@@ -82,8 +65,6 @@ const WorkoutsPage = (props) => {
           let dailyVolume = 0;
           for(j = 0; j < workoutsList[i].exercises.length; j++){
             for(k = 0; k < workoutsList[i].exercises[j].sets.length; k++){
-              console.log(workoutsList[i].exercises[j].sets[k].reps)
-              console.log(workoutsList[i].exercises[j].sets[k].weight)
               dailyVolume += (workoutsList[i].exercises[j].sets[k].reps * workoutsList[i].exercises[j].sets[k].weight);
             }
       
@@ -100,7 +81,7 @@ const WorkoutsPage = (props) => {
         }
 
 
-        console.log(theChartData)
+   
         return(theChartData)
     }
     

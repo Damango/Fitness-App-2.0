@@ -10,26 +10,64 @@ const Exercise = (props) => {
     function addSet(){
 
 
-        console.log(props.data);
+       // console.log(props.data);
 
-        let postObject = {
+        let addSetPostObject = {
            workoutID: props.workoutData._id,
            name:props.userData.name,
            newSet: {reps: 20, weight: 225},
            exerciseID:props.data.ID
 
         }
-
-
-        axios.post(props.connection + '/user/addSet', postObject).then((res) => {
-            console.log(res)
-
+        axios.post(props.connection + '/user/addSet', addSetPostObject).then((res) => {
+           // console.log(res)
             setSetList(res.data.sets)
-
-            
         })
 
-        
+
+        updateExerciseStats()
+
+    }
+
+    function deleteSet(){
+
+    }
+
+
+
+    function updateExerciseStats(){
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+
+        today = mm + '/' + dd + '/' + yyyy;
+        console.log("TODAY" + today);
+
+
+
+        let updateStatsPostObject = {
+
+            name:props.userData.name,
+            exerciseInfo: {
+            exerciseName: props.data.name,
+            sets: setList, 
+            date: today
+            }
+            
+
+        }
+
+
+
+        axios.post(props.connection + '/user/updateStats', updateStatsPostObject).then((res) => {
+            console.log('STATS');
+            console.log(res)
+        })
+
+
+
     }
 
 

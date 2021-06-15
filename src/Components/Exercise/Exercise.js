@@ -24,8 +24,11 @@ const Exercise = (props) => {
             setSetList(res.data.sets)
         })
 
+        let theSetList = setList;
+        theSetList.push({reps: 20, weight: 225})
 
-        updateExerciseStats()
+
+        updateExerciseStats(theSetList)
 
     }
 
@@ -35,7 +38,7 @@ const Exercise = (props) => {
 
 
 
-    function updateExerciseStats(){
+    function updateExerciseStats(setList){
 
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');

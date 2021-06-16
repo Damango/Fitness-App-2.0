@@ -1,10 +1,21 @@
 import React, {useState} from 'react';
 import "./Exercise.css"
 import axios from 'axios'
+import { set } from 'mongoose';
 
 const Exercise = (props) => {
 
     const [setList, setSetList] = useState(props.data.sets)
+    const [addSetRender, setAddSetRender] = useState(false)
+    const [updater, setUpdater] = useState(0)
+
+
+
+    function renderAddSet(){
+        if(addSetRender === true){
+            return(<div><input className="weight-input"  placeholder="Enter Weight" /> <input className="reps-input" placeholder="Enter Reps"/><button onClick={() => {addSet(); setAddSetRender(false)}}>SUBMIT</button></div>)
+        }
+    }
 
 
     function addSet(){
@@ -12,10 +23,13 @@ const Exercise = (props) => {
 
        // console.log(props.data);
 
+       let newSet = {reps: parseInt(document.querySelector('.reps-input').value),
+                    weight:parseInt(document.querySelector('.weight-input').value)}
+
         let addSetPostObject = {
            workoutID: props.workoutData._id,
            name:props.userData.name,
-           newSet: {reps: 20, weight: 225},
+           newSet: newSet,
            exerciseID:props.data.ID
 
         }
@@ -32,7 +46,39 @@ const Exercise = (props) => {
 
     }
 
-    function deleteSet(){
+    function deleteSet(set){
+
+        let i;
+        let theList = setList;
+        for(i = 0; i < theList.length ; i++){
+
+            if(theList[i] === set){
+                //alert(JSON.stringify(theList[i]))
+                theList.splice(i, 1)
+            }
+
+        }
+
+        setSetList(theList)
+        setUpdater(updater + 1)
+
+        console.log(theList)
+
+
+        let postObject = {
+            
+            workoutID: props.workoutData._id,
+            name:props.userData.name,
+            exerciseID:props.data.ID,
+            delete: true,
+            setList: theList
+ 
+         }
+
+        axios.post(props.connection + '/user/addSet', postObject).then((res) => {
+            // console.log(res)
+             setSetList(res.data.sets)
+         })
 
     }
 
@@ -80,7 +126,7 @@ const Exercise = (props) => {
         let postObject = {
             workoutID: props.workoutData._id,
            name:props.userData.name,
-           exerciseID:props.data.ID
+           exerciseID:props.data.ID,
         }
 
         axios.post(props.connection + '/user/deleteExercise', postObject).then((res) => {
@@ -93,8 +139,9 @@ const Exercise = (props) => {
        <div className="exercise-name">{props.data.name}</div>
        <div className="categories-container">categories</div>
        <div className="sets-list-container">
-           {setList.map((set) => <div className="set-block center-y">{set.reps} x {set.weight}</div>)}
-           <button className="add-set-button center-y" onClick={addSet}>+</button>
+           {setList.map((set) => <div className="set-block center-y">{set.reps} x {set.weight}<span onClick={ () => {deleteSet(set)}} className="delete-set">-</span></div>)}
+           <button className="add-set-button center-y" onClick={() => {setAddSetRender(true)}}>+</button>
+           {renderAddSet()}
        </div>
        <button className="delete-exercise-button" onClick={deleteExercise}>X</button>
     </div> );

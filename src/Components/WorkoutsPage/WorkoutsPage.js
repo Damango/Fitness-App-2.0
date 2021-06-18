@@ -4,7 +4,9 @@ import WorkoutCard from "../WorkoutCard/WorkoutCard"
 import LineChart from "../LineChart/LineChart"
 import WorkoutView from "../WorkoutView/WorkoutView"
 import TemplateCard from "../TemplateCard/TemplateCard"
+import ExerciseMenu from "../ExerciseMenu/ExerciseMenu"
 import axios from "axios"
+
 import { Line } from '@nivo/line';
 
 
@@ -14,7 +16,8 @@ const WorkoutsPage = (props) => {
     const [workoutView, setWorkoutView] = useState(0);
     const [workoutViewData, setWorkoutViewData] = useState()
     const [workoutsList, setWorkoutsList] = useState([]);
-    const [chartData, setChartData] = useState()
+    const [chartData, setChartData] = useState();
+    const [templateCreation, setTemplateCreation] = useState(false)
 
 
     //console.log(workoutsList)
@@ -59,7 +62,6 @@ const WorkoutsPage = (props) => {
 
     function calculateChartData(){
 
-
         let theChartData = []
         let i, j, k;
         for(i = 0; i < workoutsList.length; i++){
@@ -68,22 +70,28 @@ const WorkoutsPage = (props) => {
             for(k = 0; k < workoutsList[i].exercises[j].sets.length; k++){
               dailyVolume += (workoutsList[i].exercises[j].sets[k].reps * workoutsList[i].exercises[j].sets[k].weight);
             }
-      
           }
-    
           let dataPoint = { 
-    
             x: workoutsList[i].dateCreated,
             y: dailyVolume
-    
           }
          theChartData.push(dataPoint)
+        }
+        return(theChartData)
+    }
 
+
+
+    function renderTemplateCreation(){
+
+        if(templateCreation){
+            return(
+
+                <ExerciseMenu template={true} closeMenu={setTemplateCreation}/>
+
+           )
         }
 
-
-   
-        return(theChartData)
     }
     
 
@@ -97,6 +105,8 @@ const WorkoutsPage = (props) => {
 
 
        <div className="workouts-page-wrapper">
+
+           {renderTemplateCreation()}
 
 
            <div className="workouts-list-container">
@@ -127,7 +137,7 @@ const WorkoutsPage = (props) => {
             </div>
 
             <div className="templates-container">
-                <div className="templates-container-header">Templates</div>
+                <div className="templates-container-header">Templates <button onClick={() => {setTemplateCreation(true)}}>Create Template</button></div>
            
                 <div className="templates-wrapper">
 

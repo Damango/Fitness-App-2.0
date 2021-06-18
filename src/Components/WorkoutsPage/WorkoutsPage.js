@@ -3,6 +3,7 @@ import "./WorkoutsPage.css"
 import WorkoutCard from "../WorkoutCard/WorkoutCard"
 import LineChart from "../LineChart/LineChart"
 import WorkoutView from "../WorkoutView/WorkoutView"
+import TemplateCard from "../TemplateCard/TemplateCard"
 import axios from "axios"
 import { Line } from '@nivo/line';
 
@@ -112,26 +113,29 @@ const WorkoutsPage = (props) => {
            </div>
           
 
+        <div className="right-side-container">
+            <div className="chart-container">
+                <div className="chart-container-header">
+                    <div className="data-changer-button">Volume</div>
+                </div>
+                <div className="chart-wrapper">
+                    <LineChart chartData={calculateChartData}/>
 
-        <div className="chart-container">
-            <div className="chart-container-header">
-                <div className="data-changer-button">Volume</div>
+                
+                
+                </div>
             </div>
-            <div className="chart-wrapper">
-                <LineChart chartData={calculateChartData}/>
 
-               
-              
+            <div className="templates-container">
+                <div className="templates-container-header">Templates</div>
+           
+                <div className="templates-wrapper">
+
+                    <TemplateCard />
+
+                </div>
             </div>
         </div>
-
-        <div className="templates-container">
-        <button onClick={() => {calculateChartData()}}>PRESS ME</button>
-            <div className="templates-wrapper">
-
-            </div>
-        </div>
-
 
 
 

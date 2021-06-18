@@ -56,24 +56,51 @@
 	background-color: #156e3a;
 }
 
+.right-side-container {
+	position: relative;
+	width: 70%;
+	height: 90%;
+	float: right;
+}
+
 .chart-container {
 	position: relative;
-
-	width: 70%;
+	width: 100%;
 	height: 500px;
-	float: right;
+
 	overflow: hidden;
 }
 .chart-wrapper {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	right: -60px;
+	right: -30px;
 }
 
 .chart-container-header {
 	margin-left: 40px;
 	margin-top: 20px;
+}
+
+.templates-container {
+	position: relative;
+	width: 100%;
+	height: 400px;
+	float: right;
+
+	overflow: hidden;
+}
+
+.templates-container-header {
+	margin-left: 40px;
+	margin-top: 30px;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.templates-wrapper {
+	margin-left: 40px;
+	margin-top: 30px;
 }
 
 .workout-list-scroll {

@@ -22,7 +22,7 @@ const register = async (req,res,next) => {
 
             bcrypt.hash(req.body.password, 10, function(err, hashedPass){
                 if(err){
-                    res.json({error:'FUCK'})
+                    res.json({error:'Error Logging In'})
                 }
         
                 let user = new User({

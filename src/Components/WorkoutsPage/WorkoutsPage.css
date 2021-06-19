@@ -101,6 +101,7 @@
 .templates-wrapper {
 	margin-left: 40px;
 	margin-top: 30px;
+	display: flex;
 }
 
 .workout-list-scroll {

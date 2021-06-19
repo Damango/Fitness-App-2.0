@@ -7,19 +7,30 @@ const ExerciseMenu = (props) => {
 
 
     const [selectedExercise,  setSelectedExercise] = useState('')
-    let [selectedList, setSelectedList] = useState([]);
-    let [counter, setCounter] = useState(0)
+    const [selectedList, setSelectedList] = useState([]);
+    const [counter, setCounter] = useState(0)
     
    
 
-    function exerciseButtonStyle(){
-        if(selectedExercise != ''){
-            return('menu-add-exercise-button-selected')
+    function exerciseButtonStyle(type){
+        if(type === 'template'){
+            if(selectedList.length != 0){
+                return('submit-template-button-fill')
+            }
+            else{
+                return('submit-template-button-empty')
+            }
         }
         else{
-            return('menu-add-exercise-button-empty')
+            if(selectedExercise != ''){
+                return('menu-add-exercise-button-selected')
+            }
+            else{
+                return('menu-add-exercise-button-empty')
+            }
         }
     }
+
     function saveExercise(){
         let exerciseObject = {
             name: selectedExercise.name,
@@ -39,6 +50,25 @@ const ExerciseMenu = (props) => {
             props.updateExerciseList(newList)
             props.setUpdater(props.updater + 1)
         })
+    }
+
+    function saveTemplate(){
+
+        let templateName = document.querySelector('.template-name-input').value;
+
+
+        let postObject = {
+            name: props.userData.name,
+            templateName: templateName,
+            exercises: selectedList,
+        }
+
+        axios.post(props.connection + 'user/addTemplate', postObject).then((res) => {
+            console.log(res)
+        })
+        
+        console.log(postObject)
+
     }
 
 
@@ -78,16 +108,15 @@ const ExerciseMenu = (props) => {
         <div className="exercise-list">
         {exerciseData.exerciseList.map((exercise) => <ExerciseCategoryContainer  addToList={updateSelectedList} template={true} category={exercise.category} data={exercise} selectExercise={setSelectedExercise} selectedExercise={selectedExercise} />)}
         </div>
-      
-        <button className={exerciseButtonStyle() + ' center-x'} onClick={() => {saveExercise()}}>Add Exercise</button>
     </div>
     <div className="selected-exercise-list-container">
-        <div className="selected-list-header">Selected Exercises</div>
+        <div className="selected-list-header">Template Preview</div>
+        <input className="template-name-input center-x" placeholder="Enter Template Name"/>
         {selectedList.map((exercise) => <div className="selected-exercise-list"><div className={exercise.category + " exercise-indicator center-y"}></div>{exercise.name}</div>)}
     </div>
-    <button className="close-exercise-menu-button" onClick={() => {props.closeMenu(false)}}>X</button>
+        <button className="close-exercise-menu-button" onClick={() => {props.closeMenu(false)}}>X</button>
+        <button className={exerciseButtonStyle('template') + ' center-x'} onClick={() => {saveTemplate()}}>Submit Template</button>
     </div> );
-
     }
     else{
         return ( <div className="exercise-menu-container center-all">
@@ -96,10 +125,9 @@ const ExerciseMenu = (props) => {
         {exerciseData.exerciseList.map((exercise) => <ExerciseCategoryContainer data={exercise} selectExercise={setSelectedExercise} selectedExercise={selectedExercise}/>)}
         </div>
         <button className="close-exercise-menu-button" onClick={() => {props.closeMenu(0)}}>X</button>
-        <button className={exerciseButtonStyle() + ' center-x'} onClick={() => {saveExercise()}}>Add Exercise</button>
+        <button className={exerciseButtonStyle('workout-view') + ' center-x'} onClick={() => {saveExercise()}}>Add Exercise</button>
     </div> );
     }
-  
 }
  
 export default ExerciseMenu;

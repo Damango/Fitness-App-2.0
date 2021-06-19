@@ -18,16 +18,13 @@ const addTemplate = async (req,res,data) =>{
         
 
         let templateExist = false;
-
-
-
         templates = res2.templates;
 
 
         let i;
         for(i = 0; i < templates.length; i++){
             
-            if(templates[i].title == req.body.title){
+            if(templates[i].title == req.body.templateName){
                 console.log("FOUND")
                templateExist = true  
             }
@@ -43,14 +40,14 @@ const addTemplate = async (req,res,data) =>{
         else{
 
             let i;
-            let theData = req.body.templateData
-            let templateSkeleton = req.body.templateSkeleton;
+           
+            let templateExercises = req.body.exercises;
       
 
             let template = {
-                title: req.body.title,
-                templateSkeleton:templateSkeleton,
-                templateData:theData,
+                templateName: req.body.templateName,
+                exercises:templateExercises,
+                templateData: [],
                 id: 'Template#'+Math.floor((Math.random() * 5000)* Math.random() * 5000)
              }
     

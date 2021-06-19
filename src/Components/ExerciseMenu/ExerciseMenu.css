@@ -22,6 +22,36 @@
 	height: 600px;
 }
 
+.submit-template-button-fill {
+	position: absolute;
+
+	z-index: 12;
+	bottom: -80px;
+	background-color: #00db54;
+	color: white;
+	border-style: none;
+	padding: 10px 20px;
+	font-size: 30px;
+	font-family: "Open Sans";
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+.submit-template-button-empty {
+	position: absolute;
+
+	z-index: 12;
+	bottom: -80px;
+	background-color: #00491c;
+	color: white;
+	border-style: none;
+	padding: 10px 20px;
+	font-size: 30px;
+	font-family: "Open Sans";
+	font-weight: bold;
+	transition: 0.3s;
+}
+
 .menu-add-exercise-button-selected {
 	position: absolute;
 
@@ -104,6 +134,13 @@
 	height: 20px;
 	margin-right: 6px;
 	border-radius: 50%;
+}
+
+.template-name-input {
+	position: relative;
+	padding: 10px;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 .Chest {

@@ -16,6 +16,7 @@ const WorkoutsPage = (props) => {
     const [workoutView, setWorkoutView] = useState(0);
     const [workoutViewData, setWorkoutViewData] = useState()
     const [workoutsList, setWorkoutsList] = useState([]);
+    const [templatesList, setTemplatesList] = useState([])
     const [chartData, setChartData] = useState();
     const [templateCreation, setTemplateCreation] = useState(false)
 
@@ -27,8 +28,15 @@ const WorkoutsPage = (props) => {
             if(props.data.name != null){
                 axios.post(props.connection + 'user/getWorkouts', {name: props.data.name}).then((res) => {
                     console.log(res)
-                    if(props.data.workouts != null){
+                    if(props.data.workouts !== null){
                         setWorkoutsList(props.data.workouts.reverse())
+                    }
+                })
+
+                axios.post(props.connection + 'user/getTemplates', {name: props.data.name}).then((res) => {
+                    console.log(res)
+                    if(props.data.templates !== null){
+                        setTemplatesList(props.data.templates)
                     }
                 })
             }
@@ -46,8 +54,6 @@ const WorkoutsPage = (props) => {
             })
     }
 
-
-
     function renderWorkoutView(){
 
         if(workoutView === 1){
@@ -56,7 +62,6 @@ const WorkoutsPage = (props) => {
         else{
             return ('')
         }
-
     }
 
 
@@ -86,12 +91,9 @@ const WorkoutsPage = (props) => {
 
         if(templateCreation){
             return(
-
-                <ExerciseMenu template={true} closeMenu={setTemplateCreation}/>
-
+                <ExerciseMenu template={true} closeMenu={setTemplateCreation} userData={props.data} connection={props.connection}/>
            )
         }
-
     }
     
 
@@ -130,19 +132,13 @@ const WorkoutsPage = (props) => {
                 </div>
                 <div className="chart-wrapper">
                     <LineChart chartData={calculateChartData}/>
-
-                
-                
                 </div>
             </div>
-
             <div className="templates-container">
                 <div className="templates-container-header">Templates <button onClick={() => {setTemplateCreation(true)}}>Create Template</button></div>
-           
                 <div className="templates-wrapper">
-
-                    <TemplateCard />
-
+                    {templatesList.map((template) => <TemplateCard data={template}/>)}
+                  
                 </div>
             </div>
         </div>

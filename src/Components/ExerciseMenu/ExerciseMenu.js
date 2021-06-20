@@ -65,7 +65,12 @@ const ExerciseMenu = (props) => {
 
         axios.post(props.connection + 'user/addTemplate', postObject).then((res) => {
             console.log(res)
+            props.setTemplatesList(res.data)
         })
+
+
+        props.closeMenu(false)
+       
         
         console.log(postObject)
 

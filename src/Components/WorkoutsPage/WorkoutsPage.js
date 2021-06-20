@@ -20,6 +20,8 @@ const WorkoutsPage = (props) => {
     const [chartData, setChartData] = useState();
     const [templateCreation, setTemplateCreation] = useState(false)
 
+  
+
 
     //console.log(workoutsList)
 
@@ -91,7 +93,7 @@ const WorkoutsPage = (props) => {
 
         if(templateCreation){
             return(
-                <ExerciseMenu template={true} closeMenu={setTemplateCreation} userData={props.data} connection={props.connection}/>
+                <ExerciseMenu setTemplatesList={setTemplatesList} template={true} closeMenu={setTemplateCreation} userData={props.data} connection={props.connection}/>
            )
         }
     }

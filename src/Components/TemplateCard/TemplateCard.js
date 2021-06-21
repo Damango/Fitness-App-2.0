@@ -1,8 +1,27 @@
 import React from 'react'
+import axios from 'axios'
 import "./TemplateCard.css"
 
-const TempalteCard = (props) => {
+const TemplateCard = (props) => {
+
+
+
+function deleteTemplate(){
+    let postObject = {
+        name: props.userData.name,
+        templateID: props.data.id,
+    }
+    axios.post(props.connection + 'user/deleteTemplate', postObject).then((res) => {
+        console.log(res)
+        props.setTemplatesList(res.data)
+    })
+}
+
+
+
     return ( <div className="template-card-container">
+
+        <button onClick={deleteTemplate} className="delete-template-button">X</button>
         <div className="template-card-category-header"></div>
         <div className="template-body">
             <div className="template-title">{props.data.templateName}</div>
@@ -15,4 +34,4 @@ const TempalteCard = (props) => {
     </div> );
 }
  
-export default TempalteCard;
+export default TemplateCard;

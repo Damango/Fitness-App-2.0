@@ -139,7 +139,7 @@ const WorkoutsPage = (props) => {
             <div className="templates-container">
                 <div className="templates-container-header">Templates <button onClick={() => {setTemplateCreation(true)}}>Create Template</button></div>
                 <div className="templates-wrapper">
-                    {templatesList.map((template) => <TemplateCard data={template}/>)}
+                    {templatesList.map((template) => <TemplateCard setTemplatesList={setTemplatesList} data={template} userData={props.data} connection={props.connection}/>)}
                   
                 </div>
             </div>

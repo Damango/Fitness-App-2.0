@@ -14,7 +14,7 @@ const addTemplate = async (req,res,data) =>{
 
     
 
-   User.findOne({name:req.body.name}, {templates: 1}).then(( res2) =>{
+   User.findOne({name:req.body.name}).then(( res2) =>{
         
 
         let templateExist = false;
@@ -25,7 +25,6 @@ const addTemplate = async (req,res,data) =>{
         for(i = 0; i < templates.length; i++){
             
             if(templates[i].title == req.body.templateName){
-                console.log("FOUND")
                templateExist = true  
             }
         }
@@ -52,7 +51,7 @@ const addTemplate = async (req,res,data) =>{
              }
     
             templates.push(template)
-            console.log(templates)
+           
 
            User.updateOne({
                 name: req.body.name

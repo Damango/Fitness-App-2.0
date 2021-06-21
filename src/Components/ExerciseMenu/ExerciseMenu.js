@@ -33,10 +33,15 @@ const ExerciseMenu = (props) => {
 
     function saveExercise(){
         let exerciseObject = {
-            name: selectedExercise.name,
+            name: selectedExercise.exercise.name,
             ID: Math.floor(Math.random() * 10000),
-            sets:[]
+            category:selectedExercise.category,
+            sets:[],
+            type: selectedExercise.exercise.type
         }
+
+        console.log(selectedExercise)
+
         axios.post(props.connection + 'user/addExercise', {
             name:props.userData.name,
             newExercise: exerciseObject,
@@ -127,8 +132,9 @@ const ExerciseMenu = (props) => {
         return ( <div className="exercise-menu-container center-all">
         
         <div className="exercise-list">
-        {exerciseData.exerciseList.map((exercise) => <ExerciseCategoryContainer data={exercise} selectExercise={setSelectedExercise} selectedExercise={selectedExercise}/>)}
+        {exerciseData.exerciseList.map((exercise) => <ExerciseCategoryContainer data={exercise} category={exercise.category} selectExercise={setSelectedExercise} selectedExercise={selectedExercise}/>)}
         </div>
+        
         <button className="close-exercise-menu-button" onClick={() => {props.closeMenu(0)}}>X</button>
         <button className={exerciseButtonStyle('workout-view') + ' center-x'} onClick={() => {saveExercise()}}>Add Exercise</button>
     </div> );

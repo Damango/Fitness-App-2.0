@@ -21,14 +21,14 @@ User.findOne({name:req.body.name}).then( (user) => {
         }
     }
 
-    console.log(templates)
+    
 
     User.updateOne({name: req.body.name},{templates:templates}).then( err => {console.log(err)})
    
 
     res.json(user.templates)
 
-    console.log(req.body)
+    console.log('Template Deleted')
   
 })
 

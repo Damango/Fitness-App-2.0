@@ -39,7 +39,7 @@ const Exercise = (props) => {
         })
 
         let theSetList = setList;
-        theSetList.push({reps: 20, weight: 225})
+     
 
 
         updateExerciseStats(theSetList)

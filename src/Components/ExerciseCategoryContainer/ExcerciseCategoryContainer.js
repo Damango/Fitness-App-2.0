@@ -49,7 +49,7 @@ const ExerciseCategoryContainer = (props) => {
             {props.data.category} <i class="fas fa-caret-square-down"></i>
         </div>
     <div className={dropDownStyle()}>
-    {props.data.exercises.map((exercise) => <div className="exercise-category-item" onClick={() => {if(props.selectedExercise === exercise){props.selectExercise('')}else{props.selectExercise(exercise)} }}>{exercise.name}<span className="center-y">{exercise.variants.length + ' Variants'}</span></div>)}
+    {props.data.exercises.map((exercise) => <div className="exercise-category-item" onClick={() => {if(props.selectedExercise === exercise){props.selectExercise('')}else{props.selectExercise({exercise:exercise, category:props.category})} }}>{exercise.name}<span className="center-y">{exercise.variants.length + ' Variants'}</span></div>)}
     </div>
 </div> );
     }

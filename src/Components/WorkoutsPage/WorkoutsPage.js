@@ -59,7 +59,7 @@ const WorkoutsPage = (props) => {
     function renderWorkoutView(){
 
         if(workoutView === 1){
-            return(<WorkoutView updateWorkoutList={updateWorkoutList} updateWorkouts={setWorkoutsList} closeView={setWorkoutView} connection={props.connection} userData={props.data} data={workoutViewData}/>)
+            return(<WorkoutView setTemplatesList={setTemplatesList} templatesList={templatesList} updateWorkoutList={updateWorkoutList} updateWorkouts={setWorkoutsList} closeView={setWorkoutView} connection={props.connection} userData={props.data} data={workoutViewData}/>)
         }
         else{
             return ('')

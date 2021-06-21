@@ -3,6 +3,7 @@ import "./WorkoutView.css"
 import axios from "axios"
 import Exercise from "../Exercise/Exercise"
 import ExerciseMenu from "../ExerciseMenu/ExerciseMenu"
+import SettingsModal from "../SettingsModal/SettingsModal"
 
 const WorkoutView = (props) => {
 
@@ -11,6 +12,9 @@ const WorkoutView = (props) => {
     const [workoutData, setWorkoutData] = useState(props.data)
     const [exerciseMenu, setExerciseMenu] = useState(0)
     const [exercisesList, setExercisesList] = useState([])
+    const [settingsView, setSettingsView] = useState(false)
+
+
 
     const [updater,setUpdater] = useState(0)
 
@@ -23,6 +27,13 @@ const WorkoutView = (props) => {
             setExercisesList(props.data.exercises)
         }
     }, [])
+
+
+    function renderSettingsView(){
+        if(settingsView){
+            return(<SettingsModal deleteWorkout={deleteWorkout} saveTemplate={saveTemplate}/>)
+        }
+    }
 
 
 
@@ -81,14 +92,65 @@ const WorkoutView = (props) => {
     }
 
 
+    function saveTemplate(){
+
+
+        
+       let i;
+        let templateName = props.data.title;
+        let templateExists = false;
+        
+  
+        for(i = 0; i < props.templatesList.length; i++){
+            if(props.templatesList[i].templateName === templateName){
+                console.log("Template With That Name Already Exists");
+                templateExists = true;
+                break;
+            }
+        }
+
+        if(templateExists === false){
+
+            let noSetExerciseList = []
+
+            for(i = 0; i < exercisesList.length; i++){
+                let exerciseObject = {
+                    name: exercisesList[i].name,
+                    type: exercisesList[i].type,
+                    category: exercisesList[i].category
+                }
+                noSetExerciseList.push(exerciseObject)
+            }
+
+            let postObject = {
+                name: props.userData.name,
+                templateName: templateName,
+                exercises: noSetExerciseList,
+            }
+            axios.post(props.connection + 'user/addTemplate', postObject).then((res) => {
+                console.log(res)
+                props.setTemplatesList(res.data)
+            })
+            //props.closeMenu(false)
+            console.log(postObject)
+        }
+
+       
+      
+
+    }
+
+
+
 
     if(props.data != null){
 
 
         return(<div className="workout-view-container">
         <div className="workout-view-wrapper">
+            {renderSettingsView()}
             {renderExerciseMenu()}
-            <span className="settings-button" onClick={() => {deleteWorkout()}}><i class="fas fa-cog"></i></span>
+            <span className="settings-button" onClick={() => {setSettingsView(true)}}><i class="fas fa-cog"></i></span>
            <button className="close-workout-view-button" onClick={() => {props.closeView(0); props.updateWorkoutList()}}>Close</button>
             <div className="workout-chart-container">
             </div>
@@ -116,6 +178,7 @@ const WorkoutView = (props) => {
     else{
         return(<div className="workout-view-container">
         <div className="workout-view-wrapper">
+           
             {renderExerciseMenu()}
            <button className="close-workout-view-button" onClick={() => {props.closeView(0)}}>Close</button>
             <div className="workout-chart-container">

@@ -17,6 +17,15 @@
 	color: #2f3640;
 }
 
+.categories-container {
+	color: white;
+	padding: 6px 15px;
+	font-size: 17px;
+	display: inline-block;
+	font-weight: 600;
+	font-family: "Inter";
+}
+
 .sets-list-container {
 	display: block;
 

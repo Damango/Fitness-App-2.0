@@ -35,10 +35,6 @@ const WorkoutView = (props) => {
         }
     }
 
-
-
-    
-
     function renderExerciseMenu(){
         if(exerciseMenu === 1){
             return(<ExerciseMenu closeMenu={setExerciseMenu} updater={updater} setUpdater={setUpdater} updateWorkoutList={props.updateWorkoutList} updateExerciseList={updateExerciseList} exercises={exercisesList} connection={props.connection} userData={props.userData} data={workoutData}/>)
@@ -46,13 +42,7 @@ const WorkoutView = (props) => {
     }
 
     function updateExerciseList(data){
-
-        console.log(exercisesList)
-
         setExercisesList(data)
-
-        console.log(exercisesList)
-
     }
 
 
@@ -94,12 +84,9 @@ const WorkoutView = (props) => {
 
     function saveTemplate(){
 
-
-        
-       let i;
+        let i;
         let templateName = props.data.title;
         let templateExists = false;
-        
   
         for(i = 0; i < props.templatesList.length; i++){
             if(props.templatesList[i].templateName === templateName){
@@ -110,9 +97,7 @@ const WorkoutView = (props) => {
         }
 
         if(templateExists === false){
-
             let noSetExerciseList = []
-
             for(i = 0; i < exercisesList.length; i++){
                 let exerciseObject = {
                     name: exercisesList[i].name,
@@ -121,7 +106,6 @@ const WorkoutView = (props) => {
                 }
                 noSetExerciseList.push(exerciseObject)
             }
-
             let postObject = {
                 name: props.userData.name,
                 templateName: templateName,
@@ -134,10 +118,6 @@ const WorkoutView = (props) => {
             //props.closeMenu(false)
             console.log(postObject)
         }
-
-       
-      
-
     }
 
 

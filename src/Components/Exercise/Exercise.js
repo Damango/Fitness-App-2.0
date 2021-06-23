@@ -136,8 +136,9 @@ const Exercise = (props) => {
 
 
     return ( <div className="exercise-container center-x">
+       
        <div className="exercise-name">{props.data.name}</div>
-       <div className="categories-container">categories</div>
+       <div className={"categories-container " + props.data.category}>{props.data.category}</div>
        <div className="sets-list-container">
            {setList.map((set) => <div className="set-block center-y">{set.reps} x {set.weight}<span onClick={ () => {deleteSet(set)}} className="delete-set">-</span></div>)}
            <button className="add-set-button center-y" onClick={() => {setAddSetRender(true)}}>+</button>

@@ -36,6 +36,7 @@ const ExerciseCategoryContainer = (props) => {
     if(props.template){
         return(<div className="exercise-category-container" >
         <div className={"exercise-category-header " + props.data.category} onClick={toggleDropDown}>
+            <div className="dark-cover"></div>
             {props.data.category} <i class="fas fa-caret-square-down"></i>
         </div>
     <div className={dropDownStyle()}>
@@ -46,6 +47,7 @@ const ExerciseCategoryContainer = (props) => {
     else{
         return ( <div className="exercise-category-container" >
         <div className={"exercise-category-header " + props.data.category} onClick={toggleDropDown}>
+        <div className="dark-cover"></div>
             {props.data.category} <i class="fas fa-caret-square-down"></i>
         </div>
     <div className={dropDownStyle()}>

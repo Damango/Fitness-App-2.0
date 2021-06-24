@@ -16,19 +16,35 @@ User.findOne({name:req.body.name}).then( (user) => {
 
     let i;
     let nameExists = false;
+
+    
  
     if(exerciseStats.length === 0){
-        exerciseStats.push(req.body.exerciseInfo)
+        exerciseStats.push({exerciseName: req.body.exerciseInfo.exerciseName, sets:{
+            setList: req.body.exerciseInfo.sets,
+            date: req.body.exerciseInfo.date
+        }})
     }
 
     else{
         for(i = 0; i < exerciseStats.length; i++){
 
-            console.log(exerciseStats[i].exerciseName)
-            console.log(req.body.exerciseInfo.exerciseName)
+            
+            console.log(req.body.exerciseInfo)
             if(exerciseStats[i].exerciseName === req.body.exerciseInfo.exerciseName){
+                console.log(req.body.exerciseInfo.date)
+                console.log(exerciseStats[i].date)
+                if(req.body.exerciseInfo.date === exerciseStats[i].date){
+
+                    exerciseStats[i].sets = {setList:req.body.exerciseInfo.sets, date: req.body.exerciseInfo.date}
+                   
+                }
+
+                else{
+                    //exerciseStats.push({setList:req.body.exerciseInfo.sets, date: req.body.exerciseInfo.date})
+                }
                 
-                exerciseStats[i] = req.body.exerciseInfo
+               
                 console.log("IT EXSISTS")
                 nameExists = true;
                 break;
@@ -36,11 +52,17 @@ User.findOne({name:req.body.name}).then( (user) => {
         }
 
         if(nameExists === false){
-            exerciseStats.push(req.body.exerciseInfo);
+            let exerciseObject = {}
+            exerciseStats.push({exerciseName: req.body.exerciseInfo.exerciseName, sets:{
+                setList: req.body.exerciseInfo.sets,
+                date: req.body.exerciseInfo.date
+            }});
         }
     }
 
-   
+
+
+ 
 
 
     

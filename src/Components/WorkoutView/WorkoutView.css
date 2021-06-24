@@ -10,31 +10,47 @@
 }
 
 .close-workout-view-button {
-	position: absolute;
-	right: 0px;
-	background-color: red;
+	position: relative;
+	left: 0px;
+	top: 20px;
+	background-color: #eb2f06;
 	color: white;
-	padding: 20px;
+	padding: 10px;
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 19px;
 	z-index: 10;
+	border-style: none;
+	transition: 0.3s;
+}
+
+.close-workout-view-button:hover {
+	cursor: pointer;
+	background-color: #991d01;
+}
+
+.fa-arrow-circle-left {
+	margin-right: 10px;
 }
 
 .settings-button {
-	position: absolute;
-	right: 200px;
-	background-color: red;
-	color: white;
-	padding: 20px;
+	position: relative;
+	margin-left: 20px;
+	bottom: 2px;
+	color: #2f3640;
+	padding: 5px;
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 35px;
 	z-index: 10;
+	transition: 0.3s;
 }
 
-.workout-chart-container {
-	position: relative;
-	background-color: #8b2014;
-	height: 350px;
+.settings-button:hover {
+	cursor: pointer;
+	color: #46505f;
+}
+
+.workout-view-header {
+	height: 100px;
 }
 
 .workout-exercises-container {
@@ -47,8 +63,7 @@
 }
 
 .workout-view-stats-container {
-	background-color: blue;
-	border-bottom: 1px solid black;
+	border: 1px solid black;
 	height: 100px;
 	display: flex;
 	justify-content: space-evenly;

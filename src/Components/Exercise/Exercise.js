@@ -36,13 +36,17 @@ const Exercise = (props) => {
         axios.post(props.connection + '/user/addSet', addSetPostObject).then((res) => {
            // console.log(res)
             setSetList(res.data.sets)
+            updateExerciseStats(res.data.sets)
         })
 
         let theSetList = setList;
      
 
 
-        updateExerciseStats(theSetList)
+      
+
+        
+        
 
     }
 
@@ -80,6 +84,8 @@ const Exercise = (props) => {
              setSetList(res.data.sets)
          })
 
+       
+
     }
 
 
@@ -107,6 +113,9 @@ const Exercise = (props) => {
             
 
         }
+
+        console.log(updateStatsPostObject)
+        console.log(setList)
 
 
 

@@ -37,7 +37,7 @@ const WorkoutView = (props) => {
 
     function renderExerciseMenu(){
         if(exerciseMenu === 1){
-            return(<ExerciseMenu closeMenu={setExerciseMenu} updater={updater} setUpdater={setUpdater} updateWorkoutList={props.updateWorkoutList} updateExerciseList={updateExerciseList} exercises={exercisesList} connection={props.connection} userData={props.userData} data={workoutData}/>)
+            return(<ExerciseMenu updateTemplate={updateTemplate} closeMenu={setExerciseMenu} updater={updater} setUpdater={setUpdater} updateWorkoutList={props.updateWorkoutList} updateExerciseList={updateExerciseList} exercises={exercisesList} connection={props.connection} userData={props.userData} data={workoutData}/>)
         }
     }
 
@@ -118,6 +118,32 @@ const WorkoutView = (props) => {
             //props.closeMenu(false)
             console.log(postObject)
         }
+
+
+       
+    }
+
+
+    function updateTemplate(){
+
+        let postObject = {
+            name: props.userData.name,
+            templateName: props.data.title,
+            workoutData: workoutData.exercises,
+            date: props.data.dateCreated
+        }
+
+
+        console.log(postObject)
+
+
+
+
+
+      /*  axios.post(props.connection + 'user/updateTemplate', postObject).then((res) =>{
+            console.log(res)
+        })*/
+
     }
 
 
@@ -130,10 +156,8 @@ const WorkoutView = (props) => {
         <div className="workout-view-wrapper">
             {renderSettingsView()}
             {renderExerciseMenu()}
-            <span className="settings-button" onClick={() => {setSettingsView(true)}}><i class="fas fa-cog"></i></span>
-           <button className="close-workout-view-button" onClick={() => {props.closeView(0); props.updateWorkoutList()}}>Close</button>
-            <div className="workout-chart-container">
-            </div>
+          
+          
             <div className="workout-exercises-container">
                 <div className="workout-view-stats-container">
                     <div className="stat-block-container"><span className="stat-block-text center-all">Volume: 5000</span></div>
@@ -141,11 +165,16 @@ const WorkoutView = (props) => {
                     <div className="stat-block-container"><span className="stat-block-text center-all">Volume: 5000</span></div>
                     <div className="stat-block-container"><span className="stat-block-text center-all">Volume: 5000</span></div>
                 </div>
+                <div className="workout-view-header">
+            
+           <button className="close-workout-view-button" onClick={() => {props.closeView(0); props.updateWorkoutList()}}><i class="fas fa-arrow-circle-left"></i>Back</button>
+            </div>
+           
                 <div className="workout-exercises-wrapper">
-                <div className="workout-view-title">{workoutData.title}</div>
+                <div className="workout-view-title">{workoutData.title} <span className="settings-button center-y" onClick={() => {setSettingsView(true)}}><i class="fas fa-cog"></i></span></div>
                     <button className="add-exercise-button" onClick={() => {setExerciseMenu(1)}}>Add Exercise +</button>
                     <div className="workout-view-exercise-list-wrapper">
-                        {exercisesList.map((exercise) => <Exercise connection={props.connection} data={exercise} workoutData={props.data} userData={props.userData}/>)}
+                        {exercisesList.map((exercise) => <Exercise  updateTemplate={updateTemplate} connection={props.connection} data={exercise} workoutData={props.data} userData={props.userData}/>)}
 
                     </div>
 

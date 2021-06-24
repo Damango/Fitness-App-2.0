@@ -55,6 +55,7 @@ const ExerciseMenu = (props) => {
             props.updateExerciseList(newList)
             props.setUpdater(props.updater + 1)
         })
+       
     }
 
     function saveTemplate(){

@@ -34,19 +34,50 @@
 
 .settings-button {
 	position: relative;
-	margin-left: 20px;
-	bottom: 2px;
-	color: #2f3640;
-	padding: 5px;
-	font-weight: bold;
-	font-size: 35px;
-	z-index: 10;
+	display: inline-block;
+	text-align: center;
+	font-size: 30px;
+	bottom: -10px;
+	left: 20px;
+	background: #2f3640;
+	color: white;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
 	transition: 0.3s;
+}
+
+.settings-button i {
+	position: absolute;
 }
 
 .settings-button:hover {
 	cursor: pointer;
-	color: #46505f;
+	background-color: #191c22;
+	transform: rotate(90deg);
+}
+
+.fa-play-circle {
+	color: #27ae60;
+	font-size: 30px;
+	margin-left: 20px;
+}
+
+.fa-pause-circle {
+	color: #e67e22;
+	font-size: 30px;
+	margin-left: 20px;
+}
+
+.fa-redo-alt {
+	position: relative;
+	background-color: #3498db;
+	color: white;
+	padding: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+	margin-left: 5px;
+	bottom: 3px;
 }
 
 .workout-view-header {
@@ -78,10 +109,17 @@
 	border-left: 1px solid black;
 	text-align: center;
 	background-color: white;
+	font-weight: 600;
+	font-size: 25px;
 }
 
+.time-holder {
+	margin-left: 15px;
+}
 .stat-block-text {
 	position: absolute;
+
+	width: 90%;
 }
 
 .workout-title-input {

@@ -4,6 +4,7 @@ import axios from "axios"
 import Exercise from "../Exercise/Exercise"
 import ExerciseMenu from "../ExerciseMenu/ExerciseMenu"
 import SettingsModal from "../SettingsModal/SettingsModal"
+import Timer from 'react-compound-timer'
 
 const WorkoutView = (props) => {
 
@@ -13,6 +14,10 @@ const WorkoutView = (props) => {
     const [exerciseMenu, setExerciseMenu] = useState(0)
     const [exercisesList, setExercisesList] = useState([])
     const [settingsView, setSettingsView] = useState(false)
+    const [workoutVolume, setWorkoutVolume] = useState(0);
+    const [restTimeState, setRestTimeState] = useState('play')
+    const [durationState, setDurationState] = useState('play')
+    
 
 
 
@@ -25,8 +30,11 @@ const WorkoutView = (props) => {
 
         if(props.data != null){
             setExercisesList(props.data.exercises)
+            calculateVolume()
         }
     }, [])
+
+ 
 
 
     function renderSettingsView(){
@@ -146,6 +154,52 @@ const WorkoutView = (props) => {
 
     }
 
+    function calculateVolume(){
+        let theExercises;
+
+        if(exercisesList.length === 0){
+            theExercises = props.data.exercises
+        }
+
+        else{theExercises = exercisesList;}
+
+
+        
+
+        let i, j;
+        let totalVolume = 0;
+
+        for(i = 0; i < theExercises.length; i++){
+            for(j = 0; j < theExercises[i].sets.length; j++){
+                totalVolume += (theExercises[i].sets[j].weight * theExercises[i].sets[j].reps)
+            }
+        }
+        setWorkoutVolume(totalVolume)
+
+        console.log(exercisesList)
+
+    }
+
+    function renderPlayState(){
+        if(restTimeState === 'play'){
+            return(<i class="fas fa-play-circle"></i>)
+        }
+        else {
+            return(<i class="fas fa-pause-circle"></i>)
+        }
+    }
+
+    
+    function renderDurationState(){
+        if(durationState === 'play'){
+            return(<i class="fas fa-play-circle"></i>)
+        }
+        else {
+            return(<i class="fas fa-pause-circle"></i>)
+        }
+    }
+
+
 
 
 
@@ -156,25 +210,72 @@ const WorkoutView = (props) => {
         <div className="workout-view-wrapper">
             {renderSettingsView()}
             {renderExerciseMenu()}
-          
-          
             <div className="workout-exercises-container">
                 <div className="workout-view-stats-container">
-                    <div className="stat-block-container"><span className="stat-block-text center-all">Volume: 5000</span></div>
-                    <div className="stat-block-container"><span className="stat-block-text center-all">Volume: 5000</span></div>
-                    <div className="stat-block-container"><span className="stat-block-text center-all">Volume: 5000</span></div>
-                    <div className="stat-block-container"><span className="stat-block-text center-all">Volume: 5000</span></div>
+                    <div className="stat-block-container"><span className="stat-block-text center-all">Volume: {workoutVolume}</span></div>
+                    <div className="stat-block-container"><span className="stat-block-text center-all">Exercises: {exercisesList.length}</span></div>
+                    <div className="stat-block-container rest-timer"><span className="stat-block-text center-all">Rest Time: <span className="time-holder">
+                    <Timer initialTime={300000}
+                    startImmediately={false} direction="backward">
+                        {({start, resume, pause, stop, reset}) => (
+                            <React.Fragment>
+                                <Timer.Minutes />:
+                                <Timer.Seconds />
+                                <span className="timer-controller" onClick={() => { 
+                                        if(restTimeState === 'play')
+                                        {start(); setRestTimeState('pause')}  
+                                        else if(restTimeState === 'pause'){
+                                            pause();
+                                            setRestTimeState('play')
+                                        }
+                                    }}>
+                                    {renderPlayState()}
+                                </span>
+                              
+                           
+                
+                            <i class="fas fa-redo-alt" onClick={reset}></i>
+                            </React.Fragment>
+                        )}
+                </Timer>
+                </span>  
+                </span>
+            </div>
+                    <div className="stat-block-container"><span className="stat-block-text center-all">Duration:  
+                    <Timer initialTime={0}
+                    direction="forward">
+                        {({start, resume, pause, stop, reset}) => (
+                            <React.Fragment>
+                                <Timer.Minutes />:
+                                <Timer.Seconds />
+                                <span className="timer-controller" onClick={() => { 
+                                        if(durationState === 'play')
+                                        {start(); setDurationState('pause')}  
+                                        else if(durationState === 'pause'){
+                                            pause();
+                                            setDurationState('play')
+                                        }
+                                    }}>
+                                    {renderDurationState()}
+                                </span>
+                              
+                           
+                
+                            
+                            </React.Fragment>
+                        )}
+                </Timer>  </span></div>
                 </div>
                 <div className="workout-view-header">
             
            <button className="close-workout-view-button" onClick={() => {props.closeView(0); props.updateWorkoutList()}}><i class="fas fa-arrow-circle-left"></i>Back</button>
             </div>
-           
+          
                 <div className="workout-exercises-wrapper">
-                <div className="workout-view-title">{workoutData.title} <span className="settings-button center-y" onClick={() => {setSettingsView(true)}}><i class="fas fa-cog"></i></span></div>
+                <div className="workout-view-title">{workoutData.title} <div className="settings-button" onClick={() => {setSettingsView(true)}}><i class="fas fa-cog center-all"></i></div></div>
                     <button className="add-exercise-button" onClick={() => {setExerciseMenu(1)}}>Add Exercise +</button>
                     <div className="workout-view-exercise-list-wrapper">
-                        {exercisesList.map((exercise) => <Exercise  updateTemplate={updateTemplate} connection={props.connection} data={exercise} workoutData={props.data} userData={props.userData}/>)}
+                        {exercisesList.map((exercise) => <Exercise workoutVolume={workoutVolume} setWorkoutVolume={setWorkoutVolume} calculateVolume={calculateVolume} setExercisesList={setExercisesList} setUpdater={setUpdater} updater={updater} connection={props.connection} data={exercise} workoutData={props.data} userData={props.userData}/>)}
 
                     </div>
 

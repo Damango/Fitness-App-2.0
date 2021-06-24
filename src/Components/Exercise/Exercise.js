@@ -21,10 +21,13 @@ const Exercise = (props) => {
     function addSet(){
 
 
-       // console.log(props.data);
+       // console.log(props.data);\
+       let volumeOfSet;
 
        let newSet = {reps: parseInt(document.querySelector('.reps-input').value),
                     weight:parseInt(document.querySelector('.weight-input').value)}
+
+        volumeOfSet = (newSet.reps * newSet.weight)
 
         let addSetPostObject = {
            workoutID: props.workoutData._id,
@@ -44,8 +47,8 @@ const Exercise = (props) => {
 
 
       
-
-        
+        props.setWorkoutVolume(props.workoutVolume + volumeOfSet)
+       
         
 
     }
@@ -54,17 +57,19 @@ const Exercise = (props) => {
 
         let i;
         let theList = setList;
+        let volumeOfSet;
         for(i = 0; i < theList.length ; i++){
 
             if(theList[i] === set){
                 //alert(JSON.stringify(theList[i]))
+                volumeOfSet = (theList[i].reps * theList[i].weight)
                 theList.splice(i, 1)
             }
 
         }
 
         setSetList(theList)
-        setUpdater(updater + 1)
+        props.setUpdater(props.updater + 1)
 
         console.log(theList)
 
@@ -84,7 +89,10 @@ const Exercise = (props) => {
              setSetList(res.data.sets)
          })
 
-       
+
+         props.setWorkoutVolume(props.workoutVolume - volumeOfSet)
+         console.log(props.workoutVolume - volumeOfSet)
+         
 
     }
 
@@ -99,33 +107,17 @@ const Exercise = (props) => {
 
         today = mm + '/' + dd + '/' + yyyy;
         console.log("TODAY" + today);
-
-
-
         let updateStatsPostObject = {
-
             name:props.userData.name,
             exerciseInfo: {
             exerciseName: props.data.name,
             sets: setList, 
             date: today
             }
-            
-
         }
-
-        console.log(updateStatsPostObject)
-        console.log(setList)
-
-
-
         axios.post(props.connection + '/user/updateStats', updateStatsPostObject).then((res) => {
-            console.log('STATS');
-            console.log(res)
+
         })
-
-
-
     }
 
 
@@ -140,6 +132,9 @@ const Exercise = (props) => {
 
         axios.post(props.connection + '/user/deleteExercise', postObject).then((res) => {
             console.log(res)
+  
+            props.setExercisesList(res.data[0].exercises)
+
         })
     }
 

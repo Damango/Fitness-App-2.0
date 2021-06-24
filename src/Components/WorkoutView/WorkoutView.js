@@ -215,7 +215,7 @@ const WorkoutView = (props) => {
                     <div className="stat-block-container"><span className="stat-block-text center-all">Volume: {workoutVolume}</span></div>
                     <div className="stat-block-container"><span className="stat-block-text center-all">Exercises: {exercisesList.length}</span></div>
                     <div className="stat-block-container rest-timer"><span className="stat-block-text center-all">Rest Time: <span className="time-holder">
-                    <Timer initialTime={300000}
+                    <Timer initialTime={200000}
                     startImmediately={false} direction="backward">
                         {({start, resume, pause, stop, reset}) => (
                             <React.Fragment>
